@@ -1,3 +1,3 @@
-To execute this analysis with fake data, rename the folder 'dadosFAKE' as 'dados' and run the scrips. 
+To execute this analysis with fake data, rename the folder 'dadosFAKE' to 'dados' and run the scrips. 
 
 To run it with real data, take the 'dados' folder from the folder 'research_data' and put it in the main directory and run the scripts.
