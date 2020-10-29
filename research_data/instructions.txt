@@ -1,0 +1,2 @@
+# To make this analysis, put the folder "dados" in outside the "research_data" folder and run the scripts
+# If you want to try, just rename the folder "dadosFAKE" to "dados" and run the scripts.
