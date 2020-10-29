@@ -6,18 +6,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
-import os 
-dir_path = os.path.dirname(os.path.realpath('graphs.py'))
-
-# define the name of the directory to be created
-path = "{}/Results/Graphs/".format(dir_path)
-
-try:
-    os.mkdir(path)
-except OSError:
-    print ("Creation of the directory %s failed" % path)
-else:
-    print ("Successfully created the directory %s " % path)
+path = 'Results/Graphs/'
+# if directory Results/Graphs does not exist, try to create it
+import os
+if not os.path.exists('Results/Graphs/'):
+    try:
+        os.makedirs('Results/Graphs/')
+    except OSError:
+        print ("Creation of the directory %s failed" % path)
+    else:
+        print ("Successfully created the directory %s " % path)
 
 # read tables and process them
 
