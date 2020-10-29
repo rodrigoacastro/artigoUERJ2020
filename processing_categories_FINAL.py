@@ -9,6 +9,18 @@ import pandas as pd
 # import all functions from all_functions.py
 from all_functions import *
 
+# if directory Results/Graphs does not exist, try to create it
+path = 'Results/'
+
+import os
+if not os.path.exists('Results/'):
+    try:
+        os.makedirs('Results/')
+    except OSError:
+        print ("Creation of the directory %s failed" % path)
+    else:
+        print ("Successfully created the directory %s " % path)
+
 # collecting file paths
 paths2015 = glob.glob("dados/2015/*.txt")
 paths2016 = glob.glob("dados/2016/*.txt")
@@ -44,14 +56,14 @@ all_filenames = filenames2015 + filenames2016 + filenames2017 + filenames2018
 
 # saves all filenames in a single file
 
-with open('AllFiles.txt', 'w') as filehandle:
+with open('Results/AllFiles.txt', 'w') as filehandle:
     for listitem in all_filenames:
         filehandle.write('%s\n' % listitem)
     filehandle.write('\n') # linebreak
 
 # Saves all filenames per year in 'AllFilesPerYear.txt'
 
-with open('AllFilesPerYear.txt', 'w') as filehandle:
+with open('Results/AllFilesPerYear.txt', 'w') as filehandle:
     filehandle.write('Textos 2015\n')
     for listitem in filenames2015:
         filehandle.write('%s\n' % listitem)
@@ -88,11 +100,11 @@ for path in all_paths:
         # add item to the list
         all_texts.append(current_text)
 
-print('Textos: ')
+#print('Textos: ')
 # print('\n', all_texts, '\n')
 
 print('Total number of texts: ')
-#print(len(all_texts), '\n')
+print(len(all_texts), '\n')
 
 ##################################
 # creating regex for each category
@@ -137,7 +149,7 @@ years = [2015, 2016, 2017, 2018]
 match_year = '\<.*?({}).*?\>'
 
 year_regex_list = regex_list_maker (regex = match_year, work_list = years)
-print('year_regex_list = {}'.format(year_regex_list))
+#print('year_regex_list = {}'.format(year_regex_list))
 # regex: \<.*?(2015).*?\>
 # regex: \<.*?(2016).*?\>
 # regex: \<.*?(2017).*?\>
@@ -161,7 +173,7 @@ all_years = [item for sublist in all_years for item in sublist]
 for item in range(len(all_years)):
     all_years[item] = all_years[item][0]
 
-print('length all_years now = {}'.format(len(all_years)))
+#print('length all_years now = {}'.format(len(all_years)))
 
 #print('all_years = {}'.format(all_years))
 
@@ -178,22 +190,22 @@ df['INTER'] = result_INTER['count']
 df['SENT'] = result_SENT['count']
 df['INTRA']= result_INTRA['count']
 
-print(df)
+#print(df)
 
 # save_final df as csv
 
-df.to_csv("dataframe_counts.csv",index=False)
+df.to_csv("Results/dataframe_counts.csv",index=False)
 
 # counting data per year
 df_per_year = pd.DataFrame(df.groupby(by='year',sort=False).sum().reset_index())
-print(df_per_year)
+#print(df_per_year)
 df_per_year['total'] = df['INTER'] + df['SENT'] + df['INTRA']
 
-print('\ndataframe com frequencia absoluta por ano\n')
-print(df_per_year)
+#print('\ndataframe com frequencia absoluta por ano\n')
+#print(df_per_year)
 
 # save file as csv
-df_per_year.to_csv('df_per_year.csv',index=False)
+df_per_year.to_csv('Results/df_per_year.csv',index=False)
 
 # counting relative frequency per year
 
@@ -208,12 +220,12 @@ df_per_year_rel_freq['total'] = round (100* (df_per_year_rel_freq['total'] / df_
 
 df_per_year_rel_freq.reset_index(inplace=True)
 
-print('\ndataframe com frequencia relativa por ano\n')
-print(df_per_year_rel_freq)
+#print('\ndataframe com frequencia relativa por ano\n')
+#print(df_per_year_rel_freq)
 
 
 # exporting file as csv
-df_per_year_rel_freq.to_csv('df_per_year_rel_freq.csv',index=False)
+df_per_year_rel_freq.to_csv('Results/df_per_year_rel_freq.csv',index=False)
 
 
 ##### THE END

@@ -1,4 +1,4 @@
-# process tables and plot graphs, including dendrogram
+# process tables and plot graphs, including a dendrogram
 
 import pandas as pd
 import numpy as np
@@ -6,8 +6,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
-path = 'Results/Graphs/'
 # if directory Results/Graphs does not exist, try to create it
+path = 'Results/Graphs/'
+
 import os
 if not os.path.exists('Results/Graphs/'):
     try:
@@ -40,7 +41,7 @@ complete_df.head()
 # label counts
 label_counts = df_counts.type.value_counts().reset_index() 
 label_counts.columns=['type','count']
-#label_counts.to_csv('label_counts.csv',sep=';',index=False)
+label_counts.to_csv('Results/label_counts.csv',sep=';',index=False)
 
 # create graphs
 
@@ -69,13 +70,18 @@ plt.savefig('Results/Graphs/Graph2.tiff',dpi=300)
 
 # exported images in folder 'Results
 
-# Create Dendrogram
-
+# DENDROGRAM
+# SOURCE
 # https://stackabuse.com/hierarchical-clustering-with-python-and-scikit-learn/
+
+# Create Dendrogram - ward method
+
+method = 'ward'
+
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 
-linked = linkage(df_counts_dend, 'ward')
+linked = linkage(df_counts_dend, method)
 
 #labelList = range(len(df_counts_dend))
 labelList= list(df_counts_dend.index)
@@ -86,6 +92,68 @@ dend = dendrogram(linked,
             distance_sort='descending',
             show_leaf_counts=True)
 plt.tight_layout()
-plt.savefig('Results/Graphs/Dendrogram_texts.tiff',dpi=300)
+plt.savefig('Results/Graphs/Dendrogram_ward_texts.tiff',dpi=300)
 
 #plt.show()
+
+# Create Dendrogram - single method
+
+method = 'single'
+
+# from scipy.cluster.hierarchy import dendrogram, linkage
+# from matplotlib import pyplot as plt
+
+linked = linkage(df_counts_dend, method)
+
+#labelList = range(len(df_counts_dend))
+labelList= list(df_counts_dend.index)
+plt.figure(figsize=(10, 5)) # 1000x700 pixels
+dend = dendrogram(linked,
+            orientation='top',
+            labels=labelList,
+            distance_sort='descending',
+            show_leaf_counts=True)
+plt.tight_layout()
+plt.savefig('Results/Graphs/Dendrogram_single_texts.tiff',dpi=300)
+
+
+# Create Dendrogram - complete method
+
+method = 'complete'
+
+# from scipy.cluster.hierarchy import dendrogram, linkage
+# from matplotlib import pyplot as plt
+
+linked = linkage(df_counts_dend, method)
+
+#labelList = range(len(df_counts_dend))
+labelList= list(df_counts_dend.index)
+plt.figure(figsize=(10, 5)) # 1000x700 pixels
+dend = dendrogram(linked,
+            orientation='top',
+            labels=labelList,
+            distance_sort='descending',
+            show_leaf_counts=True)
+plt.tight_layout()
+plt.savefig('Results/Graphs/Dendrogram_complete_texts.tiff',dpi=300)
+
+
+# Create Dendrogram - average method
+
+method = 'average'
+
+# from scipy.cluster.hierarchy import dendrogram, linkage
+# from matplotlib import pyplot as plt
+
+linked = linkage(df_counts_dend, method)
+
+#labelList = range(len(df_counts_dend))
+labelList= list(df_counts_dend.index)
+plt.figure(figsize=(10, 5)) # 1000x700 pixels
+dend = dendrogram(linked,
+            orientation='top',
+            labels=labelList,
+            distance_sort='descending',
+            show_leaf_counts=True)
+plt.tight_layout()
+plt.savefig('Results/Graphs/Dendrogram_average_texts.tiff',dpi=300)

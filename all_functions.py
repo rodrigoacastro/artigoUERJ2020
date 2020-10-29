@@ -175,6 +175,20 @@ def get_output_by_index_one_text (text, pattern, data= 'categories', removeHeade
 ## FUNCTION TO GET OUTPUT (EXCERPT OR CATEGORIES) FOR ALL TEXTS
 ##########################################
 def get_output_by_index_all_texts (alltexts, filenames, year_column = True , pattern='\<(.*?)\>', removeHeader = True,saveAsCSV=False):
+    
+    # if directory Results/Graphs does not exist, try to create it
+
+    path = 'Results/'
+
+    import os
+    if not os.path.exists('Results/'):
+        try:
+            os.makedirs('Results/')
+        except OSError:
+            print ("Creation of the directory %s failed" % path)
+        else:
+            print ("Successfully created the directory %s " % path)
+    
     # empty list
     dataframe_list = []
     # creates pattern dataframes for each text
@@ -228,7 +242,7 @@ def get_output_by_index_all_texts (alltexts, filenames, year_column = True , pat
     complete_df = complete_df[['filename','year','excerpt','category']]                      
 
     if saveAsCSV:
-        complete_df.to_csv('complete_df.csv', index = False, sep='|')
+        complete_df.to_csv('Results/complete_df.csv', index = False, sep='|')
 
     #return (text_pattern)
     print("Complete dataframe exported as 'complete_df.csv'\n")

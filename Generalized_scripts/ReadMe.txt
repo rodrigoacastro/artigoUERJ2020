@@ -1,1 +1,1 @@
-These functions were generalized to capture more categories
+These functions were generalized to capture more categories. They were not tested, so they might contain bugs.

@@ -58,11 +58,11 @@ for path in all_paths:
         # add item to the list
         all_texts.append(current_text)
 
-#print('Textos: ')
-#print('\n', all_texts, '\n')
+# print('Textos: ')
+# print('\n', all_texts, '\n')
 
-print('Total number of texts: ')
-print(len(all_texts), '\n')
+# print('Total number of texts: ')
+# print(len(all_texts), '\n')
 
 new_df = pd.DataFrame()
 new_df['filename'] = all_filenames
