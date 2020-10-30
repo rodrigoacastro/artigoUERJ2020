@@ -199,7 +199,7 @@ df.to_csv("Results/dataframe_counts.csv",index=False)
 # counting data per year
 df_per_year = pd.DataFrame(df.groupby(by='year',sort=False).sum().reset_index())
 #print(df_per_year)
-df_per_year['total'] = df['INTER'] + df['SENT'] + df['INTRA']
+df_per_year['total'] = df_per_year['INTER'] + df_per_year['SENT'] + df_per_year['INTRA']
 
 #print('\ndataframe com frequencia absoluta por ano\n')
 #print(df_per_year)
