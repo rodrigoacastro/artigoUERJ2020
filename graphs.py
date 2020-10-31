@@ -38,10 +38,10 @@ df_counts_dend.head()
 complete_df = pd.read_csv('Results/complete_df.csv',sep='|')
 complete_df.head()
 
-# label counts
-label_counts = df_counts.type.value_counts().reset_index() 
-label_counts.columns=['type','count']
-label_counts.to_csv('Results/label_counts.csv',sep=';',index=False)
+# magazine section counts
+section_counts = df_counts.type.value_counts().reset_index() 
+section_counts.columns=['type','count']
+section_counts.to_csv('Results/section_counts.csv',sep=';',index=False)
 
 # create graphs
 
@@ -62,8 +62,8 @@ plt.title('Categories per year - percentual distribution')
 plt.savefig('Results/Graphs/Graph1A.tiff')
 # plt.show()
 
-label_counts.plot(kind='barh',x='type',y='count',fontsize=8)
-plt.title('Frequency of text sources')
+section_counts.plot(kind='barh',x='type',y='count',fontsize=8)
+plt.title('Frequency of magazine sections as sources')
 plt.tight_layout()
 plt.savefig('Results/Graphs/Graph2.tiff',dpi=300)
 #plt.show()
